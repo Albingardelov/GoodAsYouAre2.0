@@ -1,0 +1,36 @@
+.language-switcher {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.lang-button {
+  background: transparent;
+  border: 1px solid var(--text-color);
+  color: var(--text-color);
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.lang-button:hover {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.lang-button.active {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+  .language-switcher {
+    margin-top: 0.5rem;
+  }
+}
+
