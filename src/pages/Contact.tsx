@@ -8,7 +8,6 @@ const Contact = () => {
   const {
     data: contactData,
     isLoading,
-    isError,
   } = useContact()
 
   const [formData, setFormData] = useState({
