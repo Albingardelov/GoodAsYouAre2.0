@@ -113,6 +113,8 @@ export const useContact = () => {
     queryFn: () => fetchContact(language),
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 30 * 60 * 1000, // 30 minutes cache
+    retry: false, // Don't retry if Content Type doesn't exist
+    throwOnError: false, // Don't throw error, just return undefined
   })
 }
 

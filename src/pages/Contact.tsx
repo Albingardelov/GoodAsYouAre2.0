@@ -8,6 +8,7 @@ const Contact = () => {
   const {
     data: contactData,
     isLoading,
+    isError,
   } = useContact()
 
   const [formData, setFormData] = useState({
@@ -88,6 +89,7 @@ const Contact = () => {
           <div className="loading">Loading...</div>
         ) : (
           <div className="page-content">
+            {/* Contact form works even without Strapi data (uses fallback values) */}
             {contactData?.attributes?.title && (
               <h1>{contactData.attributes.title}</h1>
             )}
