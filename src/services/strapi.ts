@@ -16,6 +16,15 @@ import type {
 } from '../types/strapi'
 import { getStrapiUrl } from '../config/strapi'
 
+// Helper function to convert language code to Strapi locale
+// Strapi uses 'sv-SE' but our app uses 'sv'
+const getStrapiLocale = (locale: string): string => {
+  if (locale === 'sv') {
+    return 'sv-SE'
+  }
+  return locale
+}
+
 // Helper function to get image URL from Strapi image object
 // Supports both Strapi v4 (with attributes) and v5 (flat structure)
 export const getStrapiImageUrl = (image: any): string | null => {
@@ -57,9 +66,10 @@ export const getStrapiImageUrl = (image: any): string | null => {
 // Fetch home page hero content
 export const fetchHomeHero = async (locale: string = 'sv'): Promise<StrapiEntity<HomeHero>> => {
   try {
+    const strapiLocale = getStrapiLocale(locale)
     const response = await strapiApi.get<
       StrapiResponse<StrapiEntity<HomeHero> | StrapiEntity<HomeHero>[]>
-    >(`/home-heroes?locale=${locale}&populate=*`)
+    >(`/home-heroes?locale=${strapiLocale}&populate=*`)
     // Strapi returns array, get first item
     const data = response.data.data
     console.log('Home hero raw data:', data)
@@ -125,9 +135,10 @@ export const fetchHomeHero = async (locale: string = 'sv'): Promise<StrapiEntity
 export const fetchHomeTestimonial =
   async (locale: string = 'sv'): Promise<StrapiEntity<HomeTestimonial>> => {
     try {
+      const strapiLocale = getStrapiLocale(locale)
       const response = await strapiApi.get<
         StrapiResponse<StrapiEntity<HomeTestimonial> | StrapiEntity<HomeTestimonial>[]>
-      >(`/home-testimonials?locale=${locale}&populate=*`)
+      >(`/home-testimonials?locale=${strapiLocale}&populate=*`)
       // Strapi returns array, get first item
       const data = response.data.data
       if (Array.isArray(data)) {
@@ -198,10 +209,11 @@ export const fetchAllPages = async (): Promise<
 // Fetch about page content
 export const fetchAbout = async (locale: string = 'sv'): Promise<StrapiEntity<AboutContent>> => {
   try {
+    const strapiLocale = getStrapiLocale(locale)
     // Use same populate syntax as home-hero (which works)
     const response = await strapiApi.get<
       StrapiResponse<StrapiEntity<AboutContent> | StrapiEntity<AboutContent>[]>
-    >(`/abouts?locale=${locale}&populate=*`)
+    >(`/abouts?locale=${strapiLocale}&populate=*`)
     const data = response.data.data
     console.log('About raw data:', data)
     
@@ -279,9 +291,10 @@ export const fetchAbout = async (locale: string = 'sv'): Promise<StrapiEntity<Ab
 // Fetch ACT page content
 export const fetchACT = async (locale: string = 'sv'): Promise<StrapiEntity<ACTContent>> => {
   try {
+    const strapiLocale = getStrapiLocale(locale)
     const response = await strapiApi.get<
       StrapiResponse<StrapiEntity<ACTContent> | StrapiEntity<ACTContent>[]>
-    >(`/acts?locale=${locale}&populate=*`)
+    >(`/acts?locale=${strapiLocale}&populate=*`)
     const data = response.data.data
     
     if (Array.isArray(data)) {
@@ -366,9 +379,10 @@ export const fetchACT = async (locale: string = 'sv'): Promise<StrapiEntity<ACTC
 // Fetch Toxism page content
 export const fetchToxism = async (locale: string = 'sv'): Promise<StrapiEntity<ToxismContent>> => {
   try {
+    const strapiLocale = getStrapiLocale(locale)
     const response = await strapiApi.get<
       StrapiResponse<StrapiEntity<ToxismContent> | StrapiEntity<ToxismContent>[]>
-    >(`/toxisms?locale=${locale}&populate=*`)
+    >(`/toxisms?locale=${strapiLocale}&populate=*`)
     const data = response.data.data
     
     if (Array.isArray(data)) {
@@ -453,9 +467,10 @@ export const fetchToxism = async (locale: string = 'sv'): Promise<StrapiEntity<T
 // Fetch Services page content
 export const fetchServices = async (locale: string = 'sv'): Promise<StrapiEntity<ServicesContent>> => {
   try {
+    const strapiLocale = getStrapiLocale(locale)
     const response = await strapiApi.get<
       StrapiResponse<StrapiEntity<ServicesContent> | StrapiEntity<ServicesContent>[]>
-    >(`/services?locale=${locale}&populate=*`)
+    >(`/services?locale=${strapiLocale}&populate=*`)
     const data = response.data.data
     
     if (Array.isArray(data)) {
@@ -520,9 +535,10 @@ export const fetchServices = async (locale: string = 'sv'): Promise<StrapiEntity
 // Fetch Contact page content
 export const fetchContact = async (locale: string = 'sv'): Promise<StrapiEntity<ContactContent>> => {
   try {
+    const strapiLocale = getStrapiLocale(locale)
     const response = await strapiApi.get<
       StrapiResponse<StrapiEntity<ContactContent> | StrapiEntity<ContactContent>[]>
-    >(`/contacts?locale=${locale}&populate=*`)
+    >(`/contacts?locale=${strapiLocale}&populate=*`)
     const data = response.data.data
     
     if (Array.isArray(data)) {
@@ -586,9 +602,10 @@ export const fetchContact = async (locale: string = 'sv'): Promise<StrapiEntity<
 // Fetch Privacy/Disclaimer content
 export const fetchPrivacy = async (locale: string = 'sv'): Promise<StrapiEntity<PrivacyContent>> => {
   try {
+    const strapiLocale = getStrapiLocale(locale)
     const response = await strapiApi.get<
       StrapiResponse<StrapiEntity<PrivacyContent> | StrapiEntity<PrivacyContent>[]>
-    >(`/privacies?locale=${locale}&populate=*`)
+    >(`/privacies?locale=${strapiLocale}&populate=*`)
     const data = response.data.data
     
     if (Array.isArray(data)) {
@@ -640,9 +657,10 @@ export const fetchPrivacy = async (locale: string = 'sv'): Promise<StrapiEntity<
 // Fetch Privacy Policy page content
 export const fetchPrivacyPolicy = async (locale: string = 'en'): Promise<StrapiEntity<PrivacyPolicyContent>> => {
   try {
+    const strapiLocale = getStrapiLocale(locale)
     const response = await strapiApi.get<
       StrapiResponse<StrapiEntity<PrivacyPolicyContent> | StrapiEntity<PrivacyPolicyContent>[]>
-    >(`/privacy-policies?locale=${locale}&populate=*`)
+    >(`/privacy-policies?locale=${strapiLocale}&populate=*`)
     const data = response.data.data
     
     if (Array.isArray(data)) {
@@ -685,9 +703,10 @@ export const fetchPrivacyPolicy = async (locale: string = 'en'): Promise<StrapiE
 // Fetch Disclaimer page content
 export const fetchDisclaimer = async (locale: string = 'en'): Promise<StrapiEntity<DisclaimerContent>> => {
   try {
+    const strapiLocale = getStrapiLocale(locale)
     const response = await strapiApi.get<
       StrapiResponse<StrapiEntity<DisclaimerContent> | StrapiEntity<DisclaimerContent>[]>
-    >(`/disclaimers?locale=${locale}&populate=*`)
+    >(`/disclaimers?locale=${strapiLocale}&populate=*`)
     const data = response.data.data
     
     if (Array.isArray(data)) {
