@@ -106,6 +106,7 @@ const About = () => {
         ) : null}
       </div>
     </div>
+    </>
   )
 }
 
