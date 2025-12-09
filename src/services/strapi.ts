@@ -17,11 +17,9 @@ import type {
 import { getStrapiUrl } from '../config/strapi'
 
 // Helper function to convert language code to Strapi locale
-// Strapi uses 'sv-SE' but our app uses 'sv'
+// Strapi Cloud uses 'sv' directly, not 'sv-SE'
 const getStrapiLocale = (locale: string): string => {
-  if (locale === 'sv') {
-    return 'sv-SE'
-  }
+  // Strapi Cloud uses 'sv' directly, so we don't need to convert
   return locale
 }
 
@@ -136,11 +134,12 @@ export const fetchHomeTestimonial =
   async (locale: string = 'sv'): Promise<StrapiEntity<HomeTestimonial>> => {
     try {
       const strapiLocale = getStrapiLocale(locale)
-      const response = await strapiApi.get<
+      let response = await strapiApi.get<
         StrapiResponse<StrapiEntity<HomeTestimonial> | StrapiEntity<HomeTestimonial>[]>
       >(`/home-testimonials?locale=${strapiLocale}&populate=*`)
       // Strapi returns array, get first item
-      const data = response.data.data
+      let data = response.data.data
+      
       if (Array.isArray(data)) {
         if (data.length === 0) {
           throw new Error('No home-testimonial content found')
@@ -211,10 +210,10 @@ export const fetchAbout = async (locale: string = 'sv'): Promise<StrapiEntity<Ab
   try {
     const strapiLocale = getStrapiLocale(locale)
     // Use same populate syntax as home-hero (which works)
-    const response = await strapiApi.get<
+    let response = await strapiApi.get<
       StrapiResponse<StrapiEntity<AboutContent> | StrapiEntity<AboutContent>[]>
     >(`/abouts?locale=${strapiLocale}&populate=*`)
-    const data = response.data.data
+    let data = response.data.data
     console.log('About raw data:', data)
     
     if (Array.isArray(data)) {
