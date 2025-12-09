@@ -31,6 +31,10 @@ export const LanguageProvider = ({ children }: LanguageProviderProps) => {
   // Save to localStorage when language changes
   useEffect(() => {
     localStorage.setItem('language', language)
+    // Trigger storage event so cookie banner can update
+    window.dispatchEvent(new Event('storage'))
+    // Also trigger custom event for cookie banner
+    window.dispatchEvent(new CustomEvent('languageChanged', { detail: { language } }))
   }, [language])
 
   const setLanguage = (lang: Language) => {

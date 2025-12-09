@@ -1,0 +1,34 @@
+/* Custom styles for Silktide cookie icon */
+#silktide-wrapper #silktide-cookie-icon {
+  /* Reduce size slightly */
+  width: 48px !important;
+  height: 48px !important;
+  min-width: 48px !important;
+  min-height: 48px !important;
+  
+  /* Add margin from edges and footer */
+  margin-bottom: 80px !important;
+  margin-right: 20px !important;
+  
+  /* Add subtle shadow for separation */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  
+  /* Smooth transitions */
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease !important;
+  
+  /* Slightly reduce opacity when not hovered for more subtle appearance */
+  opacity: 0.9;
+}
+
+/* Hover effect for better interactivity */
+#silktide-wrapper #silktide-cookie-icon:hover {
+  transform: scale(1.1) !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.15) !important;
+  opacity: 1;
+}
+
+/* Ensure icon stays above footer content */
+#silktide-wrapper #silktide-cookie-icon.bottomRight {
+  z-index: 100000 !important;
+}
+
